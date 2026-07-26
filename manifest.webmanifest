@@ -1,0 +1,9 @@
+{
+  "name": "めぐる今治 ― 旅の主人公は、あなた。",
+  "short_name": "めぐる今治",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#fbfaf4",
+  "theme_color": "#075f5a",
+  "lang": "ja"
+}

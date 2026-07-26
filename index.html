@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#075f5a"><meta name="description" content="今治の場所ごとの物語を巡る観光Webアプリ">
+<title>めぐる今治 ― 旅の主人公は、あなた。</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css"></head>
+<body>
+<header><button class="logo" data-page="home"><span>め</span><b>めぐる今治<small>旅の主人公は、あなた。</small></b></button>
+<button id="menu">☰</button></header>
+<div id="drawer"><button id="close">×</button><h2>めぐる今治</h2>
+<button data-page="home">ホーム</button><button data-page="stories">物語を探す</button><button data-page="chapters">章を巡る</button>
+<button data-page="map">地図</button><button data-page="journal">旅帳</button><button data-page="about">案内</button></div><div id="shade"></div>
+<main>
+<section id="home" class="page active">
+<div class="hero"><div class="sea-art"><i></i><i></i><i></i></div><div class="hero-copy"><p>STORY TRAVEL IN IMABARI</p><h1>場所に、<br>物語がある。</h1><h2>旅の主人公は、あなた。</h2><div><button class="primary" data-page="stories">物語をひらく</button><button class="soft" data-page="chapters">章から巡る</button></div></div></div>
+<div class="minato card"><div class="mascot">•ᴗ•</div><div><small>旅の相棒・みなと</small><p id="greeting"></p></div><button id="speak">↻</button></div>
+<div class="section"><div class="heading"><div><small>TODAY'S STORY</small><h2>今日の物語</h2></div><button id="randomStory">別の場所 →</button></div><div id="today"></div></div>
+<div class="section"><div class="heading"><div><small>CHAPTERS</small><h2>今治を一冊の旅に</h2></div><button data-page="chapters">すべて見る →</button></div><div id="chapterPreview" class="scroll"></div></div>
+<div class="stats card"><div><b id="readN">0</b><span>読んだ物語</span></div><div><b id="visitN">0</b><span>訪問した場所</span></div><div><b id="memoN">0</b><span>旅の記憶</span></div></div>
+</section>
+<section id="stories" class="page"><div class="title"><small>STORY LIBRARY</small><h1>物語を探す</h1><p>場所の説明だけでなく、その場で出会う時間をひらきます。</p></div>
+<div class="search card"><input id="q" placeholder="場所・エリア・物語を検索"></div><div id="filters"></div><div id="storyGrid"></div></section>
+<section id="chapters" class="page"><div class="title"><small>STORY ROUTES</small><h1>章を巡る</h1><p>順番に巡ると、今治の景色が一つの物語につながります。</p></div><div id="chapterList"></div></section>
+<section id="map" class="page"><div class="title compact"><small>STORY MAP</small><h1>物語の地図</h1></div><div class="mapbar"><button id="locate" class="primary">現在地を表示</button><span id="locStatus">位置情報はこの端末内でのみ使用します</span></div><div id="leaflet"></div></section>
+<section id="journal" class="page"><div class="title"><small>MY STORY</small><h1>旅帳</h1><p>読んだ物語、訪れた場所、自分の言葉を残します。</p></div>
+<div class="tabs"><button data-tab="read" class="active">読んだ物語</button><button data-tab="visited">訪問済み</button><button data-tab="memo">旅の記憶</button></div><div id="journalBody"></div></section>
+<section id="about" class="page"><div class="title"><small>ABOUT</small><h1>この旅の案内</h1></div><article class="prose card">
+<h2>主役は、旅をするあなたです。</h2><p>「めぐる今治」は、観光地を効率よく消費するためではなく、その場所で少し立ち止まり、今治の海・島・歴史・食・ものづくりを感じるための観光Webアプリです。</p>
+<h3>物語と事実について</h3><p>施設や地域の基礎情報は今治市・今治地方観光協会等の公開情報を参考にしています。各スポットの物語部分は、旅の体験を豊かにするために本アプリ独自に執筆した表現です。</p>
+<h3>最新情報</h3><p>営業時間、料金、運航、休業、道路・施設状況は変更されます。訪問前に各スポットの「公式情報」を必ず確認してください。特にサンライズ糸山周辺は2026年度の改修・一時閉館に関する公式案内があります。</p>
+<h3>保存とプライバシー</h3><p>読了、訪問、メモはブラウザ内に保存され、外部サーバーには送信されません。</p><button id="reset">旅帳を初期化</button></article></section>
+</main>
+<nav><button data-page="home" class="active">⌂<span>ホーム</span></button><button data-page="stories">◫<span>物語</span></button><button data-page="chapters">↝<span>章</span></button><button data-page="map">⌖<span>地図</span></button><button data-page="journal">♡<span>旅帳</span></button></nav>
+<button id="fab"><span>•ᴗ•</span></button>
+<dialog id="storyDialog"><div id="storyBody"></div></dialog>
+<dialog id="minatoDialog"><button class="x">×</button><div class="mascot large">•ᴗ•</div><small>旅の相棒・みなと</small><h2 id="minatoText"></h2><div class="quick"><button data-help="view">景色</button><button data-help="history">歴史</button><button data-help="food">食</button><button data-help="rest">休憩</button></div></dialog>
+<div id="toast"></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script src="data.js"></script><script src="app.js"></script></body></html>
